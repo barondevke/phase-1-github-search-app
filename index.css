@@ -11,3 +11,10 @@
 ul {
   list-style: none;
 }
+
+.users {
+  border: none;
+  background-color: white;
+  margin: 5% 0;
+  font-size: 1.4rem;
+}
