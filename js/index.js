@@ -1,65 +1,54 @@
 
 
 const searchForm = document.getElementById('github-form')
-let repoList = document.querySelector('#repo-list')
-
-
-
-
 
 function getUsers(username) {
     fetch(`https://api.github.com/search/users?q=${username}`)
         .then((res) => res.json())
         .then((json) => createUserList(json))
-
-
-
-}
-
-function showUserRepository(username) {
-
-}
-
-function displayRepos(repos) {
-
-
-    repos.forEach(repo => {
-        const repoElement = document.createElement('div');
-        repoElement.textContent = repo.name;
-    });
-
-
 }
 
 function createUserList(json) {
-    const userList = document.querySelector('#user-list')
     json['items'].forEach(data => {
         let userName = document.createElement('li')
+        const userList = document.querySelector('#user-list')
         let moreDetails = document.createElement('h4')
         moreDetails.classList.add('users')
         moreDetails.innerHTML = data.login
         const seeDetailsBtn = document.createElement('button')
-        seeDetailsBtn.innerText = 'More Details'
+        seeDetailsBtn.innerText = 'See Repos'
+        userList.appendChild(userName)
+        userName.appendChild(moreDetails)
         userName.appendChild(seeDetailsBtn)
 
-        userList.appendChild(userName)
+        function getRepos(repoJson) {
+            repoJson.forEach(object => {
+                let repoName = document.createElement('h5')
+                repoName.innerHTML = object.name
+                userName.appendChild(repoName)
 
-        seeDetailsBtn.onclick = () => {
-            let username = data.login
-            fetch(`https://api.github.com/users/${username}/repos`)
-                .then((res) => res.json())
-                .then((json) => displayRepos(json))
+            })
+
 
         }
-        userName.appendChild(moreDetails)
 
+
+
+        seeDetailsBtn.onclick = () => {
+            seeDetailsBtn.remove()
+            fetch(`https://api.github.com/users/${data.login}/repos`)
+                .then((res) => res.json())
+                .then((json) => getRepos(json))
+
+
+
+
+        }
 
     })
-
-
-
-
 }
+
+
 
 
 

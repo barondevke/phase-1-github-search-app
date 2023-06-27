@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: black;
+
+}
+
+body {
+  background-color: #435B66;
 }
 
 #github-container {
@@ -17,4 +23,25 @@ ul {
   background-color: white;
   margin: 5% 0;
   font-size: 1.4rem;
+}
+
+button {
+  -webkit-border-radius: 16;
+  -moz-border-radius: 16;
+  border-radius: 16px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #000000;
+  padding: 6px 18px 10px 20px;
+  text-decoration: none;
+}
+
+button:hover {
+  background: #b01139;
+  text-decoration: none;
+}
+
+.heading {
+  color: white;
 }
